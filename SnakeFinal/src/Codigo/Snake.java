@@ -1,4 +1,4 @@
-package com.zetcode;
+package codigo;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;

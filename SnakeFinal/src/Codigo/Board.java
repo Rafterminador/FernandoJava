@@ -1,4 +1,4 @@
-package com.zetcode;
+package codigo;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,8 +17,8 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 600;
+    private final int B_HEIGHT = 600;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
@@ -50,9 +50,8 @@ public class Board extends JPanel implements ActionListener {
     private void initBoard() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.black);
+        setBackground(Color.GRAY);
         setFocusable(true);
-
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
         initGame();
@@ -80,7 +79,7 @@ public class Board extends JPanel implements ActionListener {
         }
         
         locateApple();
-
+        
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -118,10 +117,9 @@ public class Board extends JPanel implements ActionListener {
 
     private void gameOver(Graphics g) {
         
-        String msg = "Game Over, puntuación: " + score;
+        String msg = "Game Over, puntuación: " + score + " pulsar barra espaciadora para reiniciar";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
-
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
@@ -218,7 +216,12 @@ public class Board extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
 
             int key = e.getKeyCode();
-
+            if(e.getKeyCode()== KeyEvent.VK_SPACE)
+            {
+                score = 0;
+                dots = 1;
+              
+            }
             if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
                 leftDirection = true;
                 upDirection = false;
