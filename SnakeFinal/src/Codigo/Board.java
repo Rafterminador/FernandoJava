@@ -1,4 +1,4 @@
-package codigo;
+package Codigo;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -209,7 +209,6 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
     }
-
     private class TAdapter extends KeyAdapter {
 
         @Override
@@ -220,7 +219,13 @@ public class Board extends JPanel implements ActionListener {
             {
                 score = 0;
                 dots = 1;
-              
+                timer.stop();
+                leftDirection = false;
+                rightDirection = true;
+                upDirection = false;
+                downDirection = false;
+                inGame = true;
+                initBoard();
             }
             if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
                 leftDirection = true;

@@ -1,4 +1,4 @@
-package codigo;
+package Codigo;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -9,11 +9,10 @@ public class Snake extends JFrame {
         
         initUI();
     }
-    
+
     private void initUI() {
         
         add(new Board());
-               
         setResizable(false);
         pack();
         
@@ -21,10 +20,8 @@ public class Snake extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
 
     public static void main(String[] args) {
-        
         EventQueue.invokeLater(() -> {
             JFrame ex = new Snake();
             ex.setVisible(true);
