@@ -1,0 +1,3 @@
+Para moverse en el juego se usaran las flechas del teclado.
+Para reiniciar presionar barra espaciadora.
+Los niveles se aumentan al lograr consumir 10 manzanas es automatico, en total son 6 niveles.

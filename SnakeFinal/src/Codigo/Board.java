@@ -23,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
     private final int DELAY = 140;
-
+    
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
 
@@ -41,7 +41,10 @@ public class Board extends JPanel implements ActionListener {
     private Image ball;
     private Image apple;
     private Image head;
-
+    
+    private int score;
+    private int nivel = 1;
+    
     public Board() {
         
         initBoard();
@@ -83,8 +86,6 @@ public class Board extends JPanel implements ActionListener {
         timer = new Timer(DELAY, this);
         timer.start();
     }
-    
-    private int score;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -117,20 +118,42 @@ public class Board extends JPanel implements ActionListener {
 
     private void gameOver(Graphics g) {
         
-        String msg = "Game Over, puntuación: " + score + " pulsar barra espaciadora para reiniciar";
+        String msg = "Game Over, puntuación: " + score + ", nivel: " + nivel + " pulsar barra espaciadora para reiniciar";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
-    }
-
+    } 
+    
     private void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
             score++;
+            if (score > 10 && score < 21){
+                timer.setDelay(105);
+                nivel = 2;
+                setBackground(Color.BLACK);
+            }else if (score > 20 && score < 31 ){
+                timer.setDelay(70);
+                nivel = 3;
+                setBackground(Color.GRAY);
+            }else if (score > 30 && score < 41){
+                timer.setDelay(35);
+                nivel = 4;
+                setBackground(Color.BLACK);
+            }else if (score > 40 && score < 51){
+                timer.setDelay(25);
+                nivel = 5;
+                setBackground(Color.GRAY);
+            }else if (score > 50){
+                timer.setDelay(15);
+                nivel = 6;
+                setBackground(Color.BLACK);
+                //Ultimo nivel
+            }
             dots++;
-            locateApple();
+            locateApple();         
         }
     }
 
@@ -201,7 +224,6 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (inGame) {
-
             checkApple();
             checkCollision();
             move();
@@ -219,6 +241,7 @@ public class Board extends JPanel implements ActionListener {
             {
                 score = 0;
                 dots = 1;
+                nivel = 1;
                 timer.stop();
                 leftDirection = false;
                 rightDirection = true;
